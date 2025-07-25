@@ -9,9 +9,7 @@
         "150": "static/logo/Tridactyl_150px.png"
     },
     "background": {
-        "scripts": [
-            "background.js"
-        ]
+        "scripts": ["background.js"]
     },
     "chrome_url_overrides": {
         "newtab": "static/newtab.html"
@@ -90,12 +88,8 @@
     },
     "content_scripts": [
         {
-            "matches": [
-                "<all_urls>"
-            ],
-            "js": [
-                "content.js"
-            ],
+            "matches": ["<all_urls>"],
+            "js": ["content.js"],
             "css": [
                 "static/css/cleanslate.css",
                 "static/css/content.css",
@@ -146,6 +140,15 @@
     "options_ui": {
         "page": "static/docs/classes/_src_lib_config_.default_config.html",
         "open_in_tab": true
+    },
+    "browser_action": {
+        "default_icon": {
+            "64": "static/logo/Tridactyl_64px.png",
+            "100": "static/logo/Tridactyl_100px.png",
+            "150": "static/logo/Tridactyl_150px.png"
+        },
+        "default_title": "Tridactyl sidebar",
+        "browser_style": true
     },
     "sidebar_action": {
         "default_icon": {

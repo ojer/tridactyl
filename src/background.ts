@@ -31,6 +31,7 @@ import * as meta from "@src/background/meta"
 import * as Logging from "@src/lib/logging"
 import * as Proxy from "@src/lib/proxy"
 import { tabsProxy } from "@src/lib/tabs"
+import { addModelchangeListener } from "@src/lib/browser_action"
 
 // Add various useful modules to the window for debugging
 ;(window as any).tri = Object.assign(Object.create(null), {
@@ -264,6 +265,7 @@ const messages = {
 }
 export type Messages = typeof messages
 
+addModelchangeListener()
 messaging.setupListener(messages)
 // Listen for statistics from the background script and store
 // them. Set this one up to log directly to the statsLogger instead of
