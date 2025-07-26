@@ -129,6 +129,8 @@
         "webRequest",
         "webRequestBlocking",
         "proxy",
+        "about:*",
+        "mozillaAddons",
         "<all_urls>"
     ],
     "applications": {
