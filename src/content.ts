@@ -288,7 +288,10 @@ config.getAsync("superignore").then(async TRI_DISABLE => {
                 indicatorText: mode,
             })
             .then(() => {
-                statusIndicator?.remove()
+                // const opacity = statusIndicator.style.opacity
+                if (statusIndicator) {
+                    statusIndicator.style.opacity = 0
+                }
             })
             .catch(e => {
                 console.error(e)
@@ -314,6 +317,7 @@ config.getAsync("superignore").then(async TRI_DISABLE => {
     }`
 
         const statusIndicator = document.createElement("span")
+        changeIndicatorText(contentState.mode || "normal", statusIndicator)
         const privateMode = browser.extension.inIncognitoContext
             ? "TridactylPrivate"
             : ""
@@ -337,6 +341,10 @@ config.getAsync("superignore").then(async TRI_DISABLE => {
                         `border: ${
                             (container as any).colorCode
                         } var(--tridactyl-indicator-border-style, solid) var(--tridactyl-indicator-border-width, 1.5px) !important`,
+                    )
+                    changeIndicatorText(
+                        contentState.mode || "normal",
+                        statusIndicator,
                     )
                 })
                 .catch(error => {
@@ -377,7 +385,6 @@ config.getAsync("superignore").then(async TRI_DISABLE => {
                 document.head.appendChild(style)
             })
         }
-        changeIndicatorText(contentState.mode || "normal", statusIndicator)
 
         addContentStateChangedListener(
             async (property, oldMode, oldValue, newValue) => {
@@ -434,10 +441,12 @@ config.getAsync("superignore").then(async TRI_DISABLE => {
                     "config",
                     modeindicatorshowkeys,
                 )
+
+                changeIndicatorText(result, statusIndicator)
+
                 statusIndicator.textContent = result
                 statusIndicator.className +=
                     " TridactylMode" + statusIndicator.textContent
-                changeIndicatorText(result, statusIndicator)
                 if (
                     config.get("modeindicator") !== "true" ||
                     config.get("modeindicatormodes", mode) === "false"
